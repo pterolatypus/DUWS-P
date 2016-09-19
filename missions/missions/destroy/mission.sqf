@@ -34,7 +34,7 @@ _taskhandle setSimpleTaskDescription ["We have detected a large amount of enemy 
 _taskhandle setSimpleTaskDestination (getMarkerPos str(_markername));
 
 if (!ismultiplayer) then {
-    execVM "utilities\autoSave.sqf";
+    [] call DUWSR_fnc_saveGame;
 };
 
 ["TaskAssigned",["",_mission_name]] call bis_fnc_showNotification;

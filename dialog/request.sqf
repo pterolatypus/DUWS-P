@@ -7,8 +7,8 @@ ctrlSetText [1002, format["%1",WARCOM_blufor_ap]];
 
 // UNITS
 if (isNil "spawnableUnits") then {
-  /*spawnableUnits = call compileFinal preprocessFileLineNumbers "Platypus\cfg\unitList.sqf";*/
-  spawnableGroups = (missionConfigFile >> "CfgMission" >> "Platypus" >> "cfg" >> "unitList");
+  spawnableUnits = call compileFinal preprocessFileLineNumbers "Platypus\cfg\unitList.sqf";
+  //spawnableGroups = (missionConfigFile >> "CfgMission" >> "Platypus" >> "cfg" >> "unitList");
 };
 
 {
@@ -19,9 +19,9 @@ lbSetCurSel [2100, 0];
 
 // SQUADS
 if (isNil "spawnableGroups") then {
-  //spawnableGroups = call compileFinal preprocessFileLineNumbers "Platypus\cfg\squadList.sqf";
+  spawnableGroups = call compileFinal preprocessFileLineNumbers "Platypus\cfg\squadList.sqf";
   /*spawnableGroups = call compileFinal preprocessFileLineNumbers (missionConfigFile >> "CfgMission" >> "Platypus" >> "cfg" >> "squadList");*/
-  spawnableGroups = (missionConfigFile >> "CfgMission" >> "Platypus" >> "cfg" >> "squadList");
+  /*spawnableGroups = (missionConfigFile >> "CfgMission" >> "Platypus" >> "cfg" >> "squadList");*/
 };
 
 {
@@ -39,8 +39,8 @@ if (isNil "squadNumbers") then {
 
 // VEHICLES
 if (isNil "spawnableVehicles") then {
-  /*spawnableVehicles = call compileFinal preprocessFileLineNumbers "Platypus\cfg\vehicleList.sqf";*/
-  spawnableGroups = (missionConfigFile >> "CfgMission" >> "Platypus" >> "cfg" >> "vehicleList");
+  spawnableVehicles = call compileFinal preprocessFileLineNumbers "Platypus\cfg\vehicleList.sqf";
+  /*spawnableGroups = (missionConfigFile >> "CfgMission" >> "Platypus" >> "cfg" >> "vehicleList");*/
 };
 
 {

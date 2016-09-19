@@ -46,7 +46,7 @@ _taskhandle setSimpleTaskDescription ["One of our AH-99 helicopters has been dow
 _taskhandle setSimpleTaskDestination (getMarkerPos str(_markername));
 
 if (!ismultiplayer) then {
-    execVM "utilities\autoSave.sqf";
+    [] call DUWSR_fnc_saveGame;
 };
 
 ["TaskAssigned",["",_mission_name]] call bis_fnc_showNotification;

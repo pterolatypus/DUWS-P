@@ -27,12 +27,12 @@ disabledAI = 1;
 #include "dialog\operative\identities.hpp"
 #include "dialog\operative\operative.hpp"
 #include "params.hpp"
-#include "taw_vd\dialog.hpp"
-#include "platypus\CfgMission.hpp"
+/*#include "taw_vd\dialog.hpp"*/
 
 class CfgFunctions
 {
-  #include "taw_vd\CfgFunctions.hpp"
+  /*#include "taw_vd\CfgFunctions.hpp"*/
   #include "logsqf\CfgFunctions.hpp"
   #include "platypus\CfgFunctions.hpp"
+  #include "DUWS-R\CfgFunctions.hpp"
 };

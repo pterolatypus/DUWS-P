@@ -1,13 +1,7 @@
 //  _trg = ["Outpost Airbase",5,50,getpos this,true] execvm "createzone.sqf";
 //         Name of the place,pts,radius,position,fortified/not
 //
-
-_place = _this select 0;
-_points = _this select 1;
-_size = _this select 2;
-_trigger = _this select 3;
-_fortified = _this select 4;
-_prefab = _this select 5;
+params ["_place", "_points", "_size", "_trigger", "_fortified", "_prefab"];
 
 amount_zones_created = amount_zones_created + 1;
 publicVariable "amount_zones_created";

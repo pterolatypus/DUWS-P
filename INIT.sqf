@@ -158,7 +158,7 @@ player allowDamage false;
 #include "dialog\supports_init.hpp"
 
 if (!isMultiplayer) then {
-	getsize_script = [player] spawn DUWS-R_fnc_getMapSize;
+	getsize_script = [player] spawn DUWSR_fnc_getMapSize;
 };
 
 // IF MP
@@ -205,7 +205,7 @@ if (isMultiplayer) then {
 	};
 
 	if (!isServer) then {
-        "savegameNumber" addPublicVariableEventHandler {[] execVM "savegameClient.sqf";};
+        "savegameNumber" addPublicVariableEventHandler {[] call DUWSR_fnc_restClient};
 	};
 	if (!isServer) then {
         "capturedZonesNumber" addPublicVariableEventHandler {[] execVM "persistent\persistent_stats_zones_add.sqf";}; // change the shown CP for request dialog
@@ -218,13 +218,13 @@ if (isMultiplayer) then {
         DUWS_host_start = false;
         publicVariable "DUWS_host_start";
         waitUntil {time > 0.1};
-        getsize_script = [player] spawn DUWS-R_func_getMapSize;
+        _getsize_script = [player] spawn DUWSR_func_getMapSize;
         DUWS_host_start = true;
         publicVariable "DUWS_host_start";
 
         // init High Command
         _handle = [] execVM "dialog\hc_init.sqf";
-        waitUntil {scriptDone getsize_script};
+        waitUntil {isNil _getsize_script};
 	};
 };
 

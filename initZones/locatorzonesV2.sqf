@@ -83,7 +83,7 @@ player globalChat format["All zones found. Welcome to %1, %2",_worldName,profile
 [[{hint format["MISSION INITIALIZATION COMPLETE!\nCampaign generated\nzones: %1\nmaximum radius: %2m\nminimum radius: %3m\nmax. distance from HQ: %4m\n\nIf you experience performance issues, restart the mission and try reducing the amount of zones/and or their radius",zones_number,zones_max_radius,zones_min_radius,zones_max_dist_from_hq]}],"BIS_fnc_Spawn",true,false] call BIS_fnc_MP;
 [] spawn {
     sleep 9;
-    [] execVM "misc\bottom_right_message.sqf";
+    //[] execVM "misc\bottom_right_message.sqf";
 };
 
 
@@ -95,7 +95,7 @@ _warcom_init = [_zones_array, getpos hq_blu1, [0,0,0], blufor_ap, opfor_ap, 2700
 waitUntil {scriptDone _warcom_init};
 sleep 0.1;
 
-execVM "utilities\autoSave.sqf";
+[] call DUWSR_fnc_saveGame;
 sleep 1;
 
 [[format["MISSION INITIALIZATION COMPLETE!<br/>Campaign generated<br/>Welcome to %1, %2",_worldName,profilename]]] spawn BIS_fnc_typeText;

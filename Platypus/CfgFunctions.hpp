@@ -8,6 +8,6 @@ class Platypus {
     class initCCPAction { description = "Sets up the CCP action"; preInit = 1 };
     class interpolate {};
     class generateSideMissionName {};
-    class initAmmoBox {};
+    /*class initAmmoBox {};*/
   };
 };
