@@ -59,7 +59,7 @@ opfor_ap = 0;
 //////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////
-logging_level = "ALL";  // logging level for debugging
+logging_level = paramsArray select 0;  // logging level for debugging
 /// ------------- VALUES UNDER THIS ARE OVERWRITTEN
 zones_number = 9; // Number of capturables zones to create (when zones are created randomly)
 zones_spacing = 1200; // minimum space between 2 zones (in meters) // SOON OBSOLETE
@@ -218,13 +218,13 @@ if (isMultiplayer) then {
         DUWS_host_start = false;
         publicVariable "DUWS_host_start";
         waitUntil {time > 0.1};
-        _getsize_script = [player] spawn DUWSR_func_getMapSize;
+        _getsize_script = [player] spawn DUWSR_fnc_getMapSize;
         DUWS_host_start = true;
         publicVariable "DUWS_host_start";
 
         // init High Command
         _handle = [] execVM "dialog\hc_init.sqf";
-        waitUntil {isNil _getsize_script};
+        waitUntil {scriptDone _getsize_script};
 	};
 };
 

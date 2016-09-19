@@ -34,5 +34,5 @@ class CfgFunctions
   /*#include "taw_vd\CfgFunctions.hpp"*/
   #include "logsqf\CfgFunctions.hpp"
   #include "platypus\CfgFunctions.hpp"
-  #include "DUWS-R\CfgFunctions.hpp"
+  #include "DUWSR\CfgFunctions.hpp"
 };
