@@ -1,4 +1,4 @@
-squadList = [
+[
  ["Fireteam", (configFile >> "CfgGroups" >> "West" >> "BLU_F" >> "Infantry" >> "BUS_InfTeam"), 8, {}],
  ["Rifle Squad", (configFile >> "CfgGroups" >> "West" >> "BLU_F" >> "Infantry" >> "BUS_InfSquad"), 16, {}],
  ["Weapons Squad", (configFile >> "CfgGroups" >> "West" >> "BLU_F" >> "Infantry" >> "BUS_InfSquad_Weapons"), 18, {}],

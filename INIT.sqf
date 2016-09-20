@@ -141,13 +141,13 @@ if (isNil "FogVar") then {
 if (isNil "Array_of_FOBS") then {
     // if the player is sp or server or no fobs have been created
 	Array_of_FOBS = [];
-}
-else /// JIP for the client
+};
+/*else /// JIP for the client
 {
     {
         [_x] execVM "support\FOBactions.sqf";
     } forEach Array_of_FOBS;
-};
+};*/
 
 if (isNil "Array_of_FOBname") then {
 	Array_of_FOBname = [];
@@ -166,43 +166,26 @@ if (isMultiplayer) then {
 
 	// Get the variables from the parameters lobby
 	DUWSMP_CP_death_cost = paramsArray select 1;
-
-    if (support_armory_available) then {
-        ["AmmoboxInit",[hq_blu1, true]] spawn BIS_fnc_arsenal;
-        {
-            ["AmmoboxInit",[_x, true]] spawn BIS_fnc_arsenal;
-        } forEach (Array_of_FOBS);
-    };
+  {
+    ["AmmoboxInit",[_x, true, support_armory_available]] spawn BIS_fnc_arsenal;
+  } forEach (Array_of_FOBS);
 
 	PlayerKilledEH = player addEventHandler ["killed", {
         commandpointsblu1 = commandpointsblu1 - DUWSMP_CP_death_cost;
         publicVariable "commandpointsblu1";
     }];
 	"support_specialized_training_available" addPublicVariableEventHandler {lbSetColor [2103, 11, [0, 1, 0, 1]];};
-    "support_armory_available" addPublicVariableEventHandler {
+    /*"support_armory_available" addPublicVariableEventHandler {
         ["AmmoboxInit",[hq_blu1, true]] spawn BIS_fnc_arsenal;
         {
             ["AmmoboxInit",[_x, true]] spawn BIS_fnc_arsenal;
         } forEach (Array_of_FOBS);
         lbSetColor [2103, 5, [0, 1, 0, 1]];
-    };
+    };*/
 
     // change the shown CP for request dialog
     "commandpointsblu1" addPublicVariableEventHandler {ctrlSetText [1000, format["%1",commandpointsblu1]]; };
 
-	// each time there is a new FOB
-	"Array_of_FOBS" addPublicVariableEventHandler {
-        if (!fobSwitch) then {
-            [] execVM "support\FOBreceiveaction.sqf";
-        };
-		fobSwitch = false;
-		//Add the FoB to the list of revive locations.
-		_fobAmount = count Array_of_FOBS;
-		_fobIndex = _fobAmount - 1;
-		_createdFOB = Array_of_FOBS select _fobIndex;
-
-		[missionNamespace, _createdFOB] call BIS_fnc_addRespawnPosition;
-	};
 
 	if (!isServer) then {
         "savegameNumber" addPublicVariableEventHandler {[] call DUWSR_fnc_restClient};
@@ -262,7 +245,6 @@ if (!isServer) then {
     _drawicon = [] execVM "inithq\drawIcon.sqf";
     hintsilent "Waiting for the host to select the campaign parameters...";
     waitUntil {chosen_settings};
-    [hq_blu1] execVM "initHQ\HQaddactions.sqf";
     sleep 1;
     player setdamage 0;
     player allowDamage true;
@@ -289,7 +271,7 @@ _basepoint = [] execVM "zones_bonus.sqf";
 execVM "dialog\operative\operator_init.sqf";
 
 // Create help for DUWS
-_index = player createDiarySubject ["help","DUWS-R Manual"];
+/*_index = player createDiarySubject ["help","DUWS-R Manual"];
 player createDiaryRecord ["help", ["Feedback/bug report", "Internal team members: Use the ""issues"" section to report items."]];
 player createDiaryRecord ["help", ["Export to another island", "<font color='#FF0000'>How to export to another island:</font color><br />You just need to take the .pbo file and rename it with the name of the island you want to export the mission to. You don't have anything else to do<br /><br />Example:<br />SP_DUWS-R.stratis.pbo >>> SP_DUWS-R.chernarus.pbo"]];
 player createDiaryRecord ["help", ["Credits", "Many thanks goes out to everyone that worked on the original DUWS by kibot!"]];
@@ -308,7 +290,9 @@ player createDiaryRecord ["help", ["Taking the Island", "At the beginning of the
 _index = player createDiarySubject ["operativehelp","Special operatives"];
 player createDiaryRecord ["operativehelp", ["Skills", "<font color='#FF0000'>Aiming:</font color><br />Pretty self explanatory, how well the operative can aim, lead a target, compensante for bullet drop and manage recoil.<br /><br /><font color='#FF0000'>Reflexes:</font color><br />How fast the operator can react to a new threat and stabilize its aim.<br /><br /><font color='#FF0000'>Spotting:</font color><br />The operative ability to spot targets within it's visual or audible range, and how accurately he can spot targets.<br /><br /><font color='#FF0000'>Courage:</font color><br />Affects the morale of subordinates units of the operative, how likely they will flee, depending on what is in front of them and the squad status.<br /><br /><font color='#FF0000'>Communications:</font color><br />How quickly recognized targets are shared with the squad.<br /><br /><font color='#FF0000'>Reload speed:</font color><br />The operator's ability to switch weapon or reload quickly."]];
 player createDiaryRecord ["operativehelp", ["Recruiting operatives", "Operatives can be recruited at the HQ, inside the ""request unit"" menu. When you recruit someone for the first time, you'll have to spend 5 CP. However, once an operative has been already recruited, has been ""injured""(killed) in battle, you can recruit it again for only 2 CP after a delay between 20 and 80 minutes."]];
-player createDiaryRecord ["operativehelp", ["Overview", "You can recruit special operatives that will stay and progress with you for all the duration of the campaign. Some of these mens have special equipment, specialities and skills. Their skills will increase each time a zone is captured or a mission is accomplished, whether they're in your squad or not. However, when an operative is actually in the game, he will gain 10 spendable points wich can be assigned freely in any skill at the operative menu."]];
+player createDiaryRecord ["operativehelp", ["Overview", "You can recruit special operatives that will stay and progress with you for all the duration of the campaign. Some of these mens have special equipment, specialities and skills. Their skills will increase each time a zone is captured or a mission is accomplished, whether they're in your squad or not. However, when an operative is actually in the game, he will gain 10 spendable points wich can be assigned freely in any skill at the operative menu."]];*/
+_diaryEntries = call compile preprocessFile "Platypus\cfg\diaryInfo.sqf";
+[_diaryEntries] call Platypus_fnc_addDiaryEntries;
 
 // MP notes
 if (isMultiplayer) then {
@@ -323,21 +307,20 @@ if (isMultiplayer) then {
 	};
 };
 
-// create mission victory script //SPAWN BEGIN
-[] spawn {
 
-    // CREATE MAIN OBJECTIVE
-    capture_island_obj = player createSimpleTask ["taskIsland"];
-    capture_island_obj setSimpleTaskDescription ["The ennemy is controlling the island, we must take it back! Capture every zone under enemy control and the mission will succeed.<br />You can let your BLUFOR forces take the island by themselves and help them getting a bigger army by accomplishing side missions. Or you can capture the zones yourself and do all the big work. As the campaign progress, the war will escalate and the armies will get stronger and start to use bigger guns.<br />To capture a zone, you need to have more units inside the zone than the enemy.<br /><br />It's up to you on how you want to play this.<br />Good luck, soldier!","Take the island",""];
+//Create main objective
+capture_island_obj = player createSimpleTask ["taskIsland"];
+capture_island_obj setSimpleTaskDescription ["The ennemy is controlling the island, we must take it back! Capture every zone under enemy control and the mission will succeed.<br />You can let your BLUFOR forces take the island by themselves and help them getting a bigger army by accomplishing side missions. Or you can capture the zones yourself and do all the big work. As the campaign progress, the war will escalate and the armies will get stronger and start to use bigger guns.<br />To capture a zone, you need to have more units inside the zone than the enemy.<br /><br />It's up to you on how you want to play this.<br />Good luck, soldier!","Take the island",""];
 
-    // WAIT UNTIL ALL ZONES ARE CAPTURED
-    waitUntil {sleep 1; amount_zones_created > 0};
-    waitUntil {sleep 3; (zoneundercontrolblu >= amount_zones_created);}; // Toutes les zones sont captur�es
+//Create win condition handler
+"zoneundercontrolblu" addPublicVariableEventHandler {
+  if (zoneundercontrolblue >= amount_zones_created) then {
     persistent_stat_script_win = [] execVM "persistent\persistent_stats_win.sqf";
     ["TaskSucceeded",["","Island captured!"]] call bis_fnc_showNotification;
     capture_island_obj setTaskState "Succeeded";
     sleep 3;
     ["island_captured_win",true,true] call BIS_fnc_endMission;
+  };
 };
 
 if (zones_manually_placed) then {
@@ -349,20 +332,7 @@ if (zones_manually_placed) then {
 if (mission_DUWS_firstlaunch) then {
     waitUntil {chosen_settings};
     sleep 8;
-    ["info",["Buying troops","Go talk to your commander to buy troops and vehicles with CP"]] call bis_fnc_showNotification;
-    sleep 2.5;
-    ["info",["Command points","Acquire more CP by capturing enemy areas or accomplishing side missions"]] call bis_fnc_showNotification;
-
-    sleep 15;
-    ["info",["RESTING AND HEALING","Save the game and heal by resting at the base"]] call bis_fnc_showNotification;
-
-    sleep 15;
-    // SITREP
-    ["sitrepinfo",["SITREP","You can also save the game by giving a SITREP"]] call bis_fnc_showNotification;
-
-    sleep 20;
-    ["info",["DUWS Manual","Check the manual in the briefing for more info"]] call bis_fnc_showNotification;
-
+    [] call Platypus_fnc_showFirstLaunchHelp;
     profileNamespace setVariable ["profile_DUWS_firstlaunch", false];
     saveProfileNamespace;
 };

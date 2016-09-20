@@ -6,6 +6,7 @@ class DUWSR {
     class saveGame {};
     class restClient {};
     class restServer {};
+    class addFobActions {};
 
   };
 };

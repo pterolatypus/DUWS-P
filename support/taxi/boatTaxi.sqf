@@ -37,11 +37,11 @@ _spawnPos = [_posplayer, 400,500,10,2,5,0,[],[[0,0],[0,0]]] call BIS_fnc_findSaf
 
 // create the boat
 _helo = createVehicle ["B_Lifeboat", _spawnPos,[], 0, "FLY"];
-_helogroup = createGroup west; 
+_helogroup = createGroup west;
 _pilot = _helogroup createUnit ["B_diver_F", [5,5,5], [], 0, "NONE"];
 
 _helo addAction ["<t color='#00b7ff'>Tell the driver where to go</t>", "support\taxi\mapclickboat.sqf", "", 0, true, true, "", "vehicle _this == _target"];
-_pilot setcaptive true; 
+_pilot setcaptive true;
 _pilot moveindriver _helo;
 
 
@@ -49,7 +49,7 @@ _wp = _helogroup addWaypoint [[_foundPickupPos select 0, (_foundPickupPos select
 _wp setWaypointType "MOVE";
 [_helogroup, 1] setWaypointCombatMode "BLUE";
 
-_fobname = [1] call compile preprocessFile "random_name.sqf";
+_fobname = call Platypus_fnc_getRandomCallsign;
 
 _pilot sideChat format["This is %1, I'm approching your location for pick up, check your map. ETA 2 minutes.",_fobname];
 
@@ -61,7 +61,7 @@ hint format["%1 is too damaged to continue the mission",_fobname];
 // --- AJOUTER DE NOUVEAU LE SUPPORT
 sleep 15;
 _art = [player,"boat_taxi"] call BIS_fnc_addCommMenuItem;
-}; 
+};
 // ****************************************************
 
 _inVehCheck = true;
@@ -80,7 +80,7 @@ hint format["%1 %2-%2 is too damaged to continue the mission",_fobname,_random1,
 sleep 15;
 _art = [player,"helo_taxi"] call BIS_fnc_addCommMenuItem;
 // --- AJOUTER DE NOUVEAU LE SUPPORT
-}; 
+};
 // *****************************
 
 
@@ -88,7 +88,7 @@ _art = [player,"helo_taxi"] call BIS_fnc_addCommMenuItem;
 playMusic [_music, 0];
 _helo lock true;
 titleText ["Driver: Roger that, we're oscar mike...", "PLAIN DOWN"];
-str(_markerpickup) setMarkerPos ClickedTaxiPos; 
+str(_markerpickup) setMarkerPos ClickedTaxiPos;
 str(_markerpickup) setMarkerText "Drop point";
 
 
@@ -103,7 +103,7 @@ hint format["%1 %2-%2 is too damaged to continue the mission",_fobname,_random1,
 // --- AJOUTER DE NOUVEAU LE SUPPORT
 sleep 15;
 _art = [player,"helo_taxi"] call BIS_fnc_addCommMenuItem;
-}; 
+};
 // *****************************
 
 // TELEPORT BOAT NEAR DROP POINT
@@ -130,7 +130,7 @@ hint format["%1 %2-%2 is too damaged to continue the mission",_fobname,_random1,
 // --- AJOUTER DE NOUVEAU LE SUPPORT
 sleep 15;
 _art = [player,"helo_taxi"] call BIS_fnc_addCommMenuItem;
-}; 
+};
 // *****************************
 
 
@@ -144,7 +144,7 @@ hint format["%1 %2-%2 is too damaged to continue the mission",_fobname,_random1,
 // --- AJOUTER DE NOUVEAU LE SUPPORT
 sleep 15;
 _art = [player,"helo_taxi"] call BIS_fnc_addCommMenuItem;
-}; 
+};
 // *****************************
 titleText ["Driver: We've arrived at the drop point", "PLAIN DOWN"];
 
@@ -164,7 +164,7 @@ hint format["%1 %2-%2 is too damaged to continue the mission",_fobname,_random1,
 // --- AJOUTER DE NOUVEAU LE SUPPORT
 sleep 15;
 _art = [player,"helo_taxi"] call BIS_fnc_addCommMenuItem;
-}; 
+};
 // *****************************
 
 

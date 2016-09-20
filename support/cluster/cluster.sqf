@@ -30,7 +30,7 @@ _markername = format["clus%1%2",_position]; // Define marker name
 _markerstr = createMarker [str(_markername), _position];
 _markerstr setMarkerShape "ELLIPSE";
 str(_markername) setMarkerColor "ColorGrey";
-str(_markername) setMarkerSize [_radius,_radius]; 
+str(_markername) setMarkerSize [_radius,_radius];
 
 
 // make HQ zone notification trigger
@@ -47,9 +47,9 @@ _group = createGroup west;
 _unit = _group createUnit ["B_Soldier_SL_F", [0,0,0], [], 0, "FORM"];
 _unit allowDamage false;
 // generate randomname
-_fobname = [1] call compile preprocessFile "random_name.sqf";
+_fobname = call Platypus_fnc_getRandomCallsign;
 _random1 = round random 9;
-_random2 = round random 9; 
+_random2 = round random 9;
 
 _unit sidechat format["This is %1 %2-%3, we are approaching the designated target area, ETA 2 minutes",_fobname,_random1,_random2];
 sleep 60;

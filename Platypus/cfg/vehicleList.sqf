@@ -1,6 +1,6 @@
 //Syntax for entries:
 //["name to be shown in list", "vehicle_class_name", cp_cost, {array of functions to be executed with the vehicle as only argument}],
-vehicleList = []
+[
   ["Small Transport Truck 1 (seats 6)", "I_G_Offroad_01_F", 4, {}],
   ["Small Transport Truck 2 (seats 9)", "I_G_Van_01_transport_F", 6, {}],
   ["Hunter Unarmed", "B_MRAP_01_F", 5, {}],
@@ -13,7 +13,8 @@ vehicleList = []
   ["MH-9 Hummingbird", "B_Heli_Light_01_F", 15, {}],
   ["M-900 Civilian Copter", "C_Heli_Light_01_civil_F", 12, {}],
   ["Mi-290Black Taru Sling", "O_Heli_Transport_04_F", 18, {
-    {_this execVM "\a3\Air_F_Heli\Heli_Transport_04\Scripts\Heli_Transport_04_basic_black.sqf";}}
+    _this execVM "\a3\Air_F_Heli\Heli_Transport_04\Scripts\Heli_Transport_04_basic_black.sqf";
+    }
   ],
   ["UH-80 Ghosthawk", "B_Heli_Transport_01_F", 22, {}],
   ["CH-67 Huron", "B_Heli_Transport_03_F", 26, {}],
@@ -23,19 +24,19 @@ vehicleList = []
   ["M2A1 Slammer", "B_MBT_01_cannon_F", 40, {}],
   ["CRV-6e Bobcat", "B_APC_Tracked_01_CRV_F", 28, {}],
   ["SF SUV", "C_Offroad_01_F", 2, {
-    { sleep 1;
-      _this setObjectTexture {0, "#(argb,8,8,3)color(0.141,0.118,0.082,1)"};
-      _this animate ["Hidepolice", 1};
-      _this animate ["Hideservices", 1};
-      _this animate ["Hidebackpacks", 0};
-      _this animate ["Hidebumper1", 0};
-      _this animate ["Hidebumper2", 0};
-      _this animate ["Hideconstruction", 0};
-      _this animate ["Hidedoor1", 1};
-      _this animate ["Hidedoor2", 1};
-      _this animate ["Hidedoor3", 1};
-      _this animate ["Hideglass2", 1};
-    }}
+    sleep 1;
+      _this setObjectTexture [0, "#(argb,8,8,3)color(0.141,0.118,0.082,1)"];
+      _this animate ["Hidepolice", 1];
+      _this animate ["Hideservices", 1];
+      _this animate ["Hidebackpacks", 0];
+      _this animate ["Hidebumper1", 0];
+      _this animate ["Hidebumper2", 0];
+      _this animate ["Hideconstruction", 0];
+      _this animate ["Hidedoor1", 1];
+      _this animate ["Hidedoor2", 1];
+      _this animate ["Hidedoor3", 1];
+      _this animate ["Hideglass2", 1];
+    }
   ],
   ["MLRS Artillery ", "B_MBT_01_mlrs_F", 75, {}],
   ["Scorcher Artillery ", "B_MBT_01_arty_F", 75, {}],

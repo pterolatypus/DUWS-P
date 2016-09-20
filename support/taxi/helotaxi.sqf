@@ -36,29 +36,29 @@ str(_markerpickup) setMarkerText "LZ";
 
 // create the chopper, gunners and pilots
 _helo = createVehicle ["B_Heli_Transport_01_camo_F", [_posplayer select 0, (_posplayer select 1)+2000, 200],[], 0, "FLY"];
-_helogroup = createGroup west; 
+_helogroup = createGroup west;
 _pilot = _helogroup createUnit ["B_Helipilot_F", [5,5,5], [], 0, "NONE"];
 _copilot = _helogroup createUnit ["B_Helipilot_F", [5,5,5], [], 0, "NONE"];
 _gunner1 = _helogroup createUnit ["B_Helipilot_F", [5,5,5], [], 0, "NONE"];
 _gunner2 = _helogroup createUnit ["B_Helipilot_F", [5,5,5], [], 0, "NONE"];
 _helo flyInHeight 100;
 _helo addAction ["<t color='#00b7ff'>Give a LZ to the pilot</t>", "support\taxi\mapclickhelo.sqf", "", 0, true, true, "", "vehicle _this == _target"];
- 
-_pilot setcaptive true; 
- 
+
+_pilot setcaptive true;
+
 _pilot moveindriver _helo;
-_copilot moveInTurret [_helo, [0]]; 
+_copilot moveInTurret [_helo, [0]];
 _gunner1 moveInTurret [_helo, [1]];
 _gunner2 moveInTurret [_helo, [2]];
 
 
 // create the helipad to land and the waypoints
-_helipad1 = createVehicle ["Land_HelipadEmpty_F", _foundPickupPos, [], 0, "NONE"]; 
+_helipad1 = createVehicle ["Land_HelipadEmpty_F", _foundPickupPos, [], 0, "NONE"];
 _wp = _helogroup addWaypoint [[_foundPickupPos select 0, (_foundPickupPos select 1)-75], 0];
 _wp setWaypointType "MOVE";
 [_helogroup, 1] setWaypointCombatMode "BLUE";
 
-_fobname = [1] call compile preprocessFile "random_name.sqf";
+_fobname = [] call Platypus_fnc_getRandomCallsign;
 _random1 = round random 9;
 _random2 = round random 9;
 
@@ -68,7 +68,7 @@ _pilot sideChat format["This is %1 %2-%3, we're approaching your location for pi
 
 
 waitUntil {_foundpickuppos distance _helo < 350 or (vehicle _pilot == _pilot or !alive _pilot)}; // wait until the helo is near the lz
-_pilot setcaptive false; 
+_pilot setcaptive false;
 // IF THE PILOT IS DEAD OR CHOPPA DOWN ******************
 if (vehicle _pilot == _pilot or !alive _pilot) exitWith {
 deleteVehicle _helipad1;
@@ -77,7 +77,7 @@ hint format["%1 %2-%2 is too damaged to continue the mission",_fobname,_random1,
 // --- AJOUTER DE NOUVEAU LE SUPPORT
 sleep 15;
 _art = [player,"helo_taxi"] call BIS_fnc_addCommMenuItem;
-}; 
+};
 // ****************************************************
 
 // spawn smokeshell
@@ -113,7 +113,7 @@ hint format["%1 %2-%2 is too damaged to continue the mission",_fobname,_random1,
 sleep 15;
 _art = [player,"helo_taxi"] call BIS_fnc_addCommMenuItem;
 // --- AJOUTER DE NOUVEAU LE SUPPORT
-}; 
+};
 // *****************************
 
 
@@ -121,7 +121,7 @@ _art = [player,"helo_taxi"] call BIS_fnc_addCommMenuItem;
 playMusic [_music, 0];
 //_helo lock true;
 titleText ["Pilot: Roger that, we're oscar mike...", "PLAIN DOWN"];
-str(_markerpickup) setMarkerPos ClickedTaxiPos; 
+str(_markerpickup) setMarkerPos ClickedTaxiPos;
 
 // create the helipad to land and the waypoints
 _helipad = createVehicle ["Land_HelipadEmpty_F", ClickedTaxiPos, [], 0, "NONE"];
@@ -150,7 +150,7 @@ hint format["%1 %2-%2 is too damaged to continue the mission",_fobname,_random1,
 // --- AJOUTER DE NOUVEAU LE SUPPORT
 sleep 15;
 _art = [player,"helo_taxi"] call BIS_fnc_addCommMenuItem;
-}; 
+};
 // *****************************
 if (enableChopperFastTravel) then {
 // TELEPORT HELO NEAR LZ
@@ -172,7 +172,7 @@ hint format["%1 %2-%2 is too damaged to continue the mission",_fobname,_random1,
 // --- AJOUTER DE NOUVEAU LE SUPPORT
 sleep 15;
 _art = [player,"helo_taxi"] call BIS_fnc_addCommMenuItem;
-}; 
+};
 // *****************************
 _helo land "LAND";
 
@@ -196,7 +196,7 @@ hint format["%1 %2-%2 is too damaged to continue the mission",_fobname,_random1,
 // --- AJOUTER DE NOUVEAU LE SUPPORT
 sleep 15;
 _art = [player,"helo_taxi"] call BIS_fnc_addCommMenuItem;
-}; 
+};
 // *****************************
 titleText ["Pilot: We've arrived at the LZ", "PLAIN DOWN"];
 _helo lock false;
@@ -226,7 +226,7 @@ hint format["%1 %2-%2 is too damaged to continue the mission",_fobname,_random1,
 // --- AJOUTER DE NOUVEAU LE SUPPORT
 sleep 15;
 _art = [player,"helo_taxi"] call BIS_fnc_addCommMenuItem;
-}; 
+};
 // *****************************
 _pilot sideChat format["This is %1 %2-%3, we are RTB",_fobname,_random1,_random2];
 

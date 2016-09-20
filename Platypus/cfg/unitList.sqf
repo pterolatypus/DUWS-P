@@ -1,4 +1,4 @@
-unitList = [
+[
   ["Rifleman", "B_Soldier_F", 2, {}],
   ["Grenadier", "B_Soldier_GL_F", 3, {}],
   ["Automatic Rifleman", "B_Soldier_AR_F", 3, {}],

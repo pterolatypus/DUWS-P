@@ -78,21 +78,6 @@ _trg2 setTriggerStatements["this", format["[""%1"",thislist] execvm 'enterlocati
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // move the spawn location, or units get stuck
 _fortifiedspawn = _trigger;
 _trigger = [(_trigger select 0)+40,_trigger select 1];

@@ -15,7 +15,7 @@ if (commandpointsblu1 >= _cost) then {
       publicVariable "commandpointsblu1";
       ctrlSetText [1000, format["%1",commandpointsblu1]];
       _vehic = _vehicleClass createVehicle _spawnPos;
-      {_vehic call _x;} forEach _specialFunctions;
+      _vehic call _specialFunctions;
       hint "Vehicle ready !";
 } else {
   hint "Not enough command points";

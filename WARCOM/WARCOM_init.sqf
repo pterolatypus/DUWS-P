@@ -19,7 +19,7 @@ _opfor_assault_delay = _this select 8;
 // INIT VARIABLES
 WARCOM_blu_hq_pos = [_blu_hq_pos select 0, (_blu_hq_pos select 1) + 16];
 WARCOM_op_hq_pos = _op_hq_pos;
-WARCOM_blufor_ap = _blufor_ap;    
+WARCOM_blufor_ap = _blufor_ap;
 WARCOM_opfor_ap = _opfor_ap;
 WARCOM_blu_attack_delay = _blu_attack_delay;
 WARCOM_marker_num = 0;
@@ -31,17 +31,16 @@ publicVariable "WARCOM_blufor_ap";
 
 
 
-// SORT ARRAY OF OPFOR ZONES ACCORDING TO DISTANCE FROM BLUHQ 
+// SORT ARRAY OF OPFOR ZONES ACCORDING TO DISTANCE FROM BLUHQ
 WARCOM_createdZones = [_array_of_zones_total,[WARCOM_blu_hq_pos],{_input0 distance _x},"ASCEND"] call BIS_fnc_sortBy;
 
 // ARRAY OF ZONES UNDER BLUFOR CONTROL
 WARCOM_zones_controled_by_BLUFOR = [];
 
 
-// ARRAY OF ZONES UNDER OPFOR CONTROL 
-// make sure it's not a reference
-_WARCOM_zones_controled_by_OPFOR = WARCOM_createdZones;
-WARCOM_zones_controled_by_OPFOR = [] + _WARCOM_zones_controled_by_OPFOR;
+// ARRAY OF ZONES UNDER OPFOR CONTROL
+// at the start, this is a copy of the array of all zones
+WARCOM_zones_controled_by_OPFOR = +WARCOM_createdZones;
 
 // Init BLU patrols
 _blu_patrol = [] execVM "WARCOM\WARCOM_blu_patrol.sqf";
