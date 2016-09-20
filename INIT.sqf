@@ -73,8 +73,8 @@ zones_min_radius = 200; // Determine the minium radius a generated zone can have
 /////////////////////////////////////////////////////////
 // preprocess the qrf file for the EH
 QRF_test = compile preprocessFile "WARCOM\WARCOM_opf_qrf.sqf";
-persistent_stat_script_init = [] execVM "persistent\persistent_stats_init.sqf";
-waitUntil {scriptDone persistent_stat_script_init};
+/*persistent_stat_script_init = [] execVM "persistent\persistent_stats_init.sqf";
+waitUntil {scriptDone persistent_stat_script_init};*/
 execvm "dynamic_music\dyn_music_init.sqf";
 
 // nber of missions succ (!!dont touch!!)
@@ -137,17 +137,10 @@ if (isNil "FogVar") then {
 	FogVar = 0;
 };
 
-// this is a special one (if/else)
 if (isNil "Array_of_FOBS") then {
-    // if the player is sp or server or no fobs have been created
 	Array_of_FOBS = [];
 };
-/*else /// JIP for the client
-{
-    {
-        [_x] execVM "support\FOBactions.sqf";
-    } forEach Array_of_FOBS;
-};*/
+
 
 if (isNil "Array_of_FOBname") then {
 	Array_of_FOBname = [];
@@ -166,35 +159,20 @@ if (isMultiplayer) then {
 
 	// Get the variables from the parameters lobby
 	DUWSMP_CP_death_cost = paramsArray select 1;
-  {
-    ["AmmoboxInit",[_x, true, support_armory_available]] spawn BIS_fnc_arsenal;
-  } forEach (Array_of_FOBS);
 
 	PlayerKilledEH = player addEventHandler ["killed", {
         commandpointsblu1 = commandpointsblu1 - DUWSMP_CP_death_cost;
         publicVariable "commandpointsblu1";
     }];
 	"support_specialized_training_available" addPublicVariableEventHandler {lbSetColor [2103, 11, [0, 1, 0, 1]];};
-    /*"support_armory_available" addPublicVariableEventHandler {
-        ["AmmoboxInit",[hq_blu1, true]] spawn BIS_fnc_arsenal;
-        {
-            ["AmmoboxInit",[_x, true]] spawn BIS_fnc_arsenal;
-        } forEach (Array_of_FOBS);
-        lbSetColor [2103, 5, [0, 1, 0, 1]];
-    };*/
 
-    // change the shown CP for request dialog
-    "commandpointsblu1" addPublicVariableEventHandler {ctrlSetText [1000, format["%1",commandpointsblu1]]; };
+  "commandpointsblu1" addPublicVariableEventHandler {ctrlSetText [1000, format["%1",commandpointsblu1]]; };
 
 
 	if (!isServer) then {
-        "savegameNumber" addPublicVariableEventHandler {[] call DUWSR_fnc_restClient};
-	};
-	if (!isServer) then {
-        "capturedZonesNumber" addPublicVariableEventHandler {[] execVM "persistent\persistent_stats_zones_add.sqf";}; // change the shown CP for request dialog
-	};
-	if (!isServer) then {
-        "finishedMissionsNumber" addPublicVariableEventHandler {[] execVM "persistent\persistent_stats_missions_total.sqf";}; // change the shown CP for request dialog
+        "savegameNumber" addPublicVariableEventHandler { call DUWSR_fnc_restClient };
+        "capturedZonesNumber" addPublicVariableEventHandler { call persistent_fnc_incrementCapturedZones }; // change the shown CP for request dialog
+        "finishedMissionsNumber" addPublicVariableEventHandler { call persistent_fnc_incrementCompletedMissions }; // change the shown CP for request dialog
 	};
 
     if (isServer) then { // SERVER INIT
@@ -291,7 +269,7 @@ _index = player createDiarySubject ["operativehelp","Special operatives"];
 player createDiaryRecord ["operativehelp", ["Skills", "<font color='#FF0000'>Aiming:</font color><br />Pretty self explanatory, how well the operative can aim, lead a target, compensante for bullet drop and manage recoil.<br /><br /><font color='#FF0000'>Reflexes:</font color><br />How fast the operator can react to a new threat and stabilize its aim.<br /><br /><font color='#FF0000'>Spotting:</font color><br />The operative ability to spot targets within it's visual or audible range, and how accurately he can spot targets.<br /><br /><font color='#FF0000'>Courage:</font color><br />Affects the morale of subordinates units of the operative, how likely they will flee, depending on what is in front of them and the squad status.<br /><br /><font color='#FF0000'>Communications:</font color><br />How quickly recognized targets are shared with the squad.<br /><br /><font color='#FF0000'>Reload speed:</font color><br />The operator's ability to switch weapon or reload quickly."]];
 player createDiaryRecord ["operativehelp", ["Recruiting operatives", "Operatives can be recruited at the HQ, inside the ""request unit"" menu. When you recruit someone for the first time, you'll have to spend 5 CP. However, once an operative has been already recruited, has been ""injured""(killed) in battle, you can recruit it again for only 2 CP after a delay between 20 and 80 minutes."]];
 player createDiaryRecord ["operativehelp", ["Overview", "You can recruit special operatives that will stay and progress with you for all the duration of the campaign. Some of these mens have special equipment, specialities and skills. Their skills will increase each time a zone is captured or a mission is accomplished, whether they're in your squad or not. However, when an operative is actually in the game, he will gain 10 spendable points wich can be assigned freely in any skill at the operative menu."]];*/
-_diaryEntries = call compile preprocessFile "Platypus\cfg\diaryInfo.sqf";
+_diaryEntries = call compileFinal preprocessFileLineNumbers "Platypus\cfg\diaryInfo.sqf";
 [_diaryEntries] call Platypus_fnc_addDiaryEntries;
 
 // MP notes
@@ -315,7 +293,7 @@ capture_island_obj setSimpleTaskDescription ["The ennemy is controlling the isla
 //Create win condition handler
 "zoneundercontrolblu" addPublicVariableEventHandler {
   if (zoneundercontrolblue >= amount_zones_created) then {
-    persistent_stat_script_win = [] execVM "persistent\persistent_stats_win.sqf";
+    call persistent_fnc_addMissionWin;
     ["TaskSucceeded",["","Island captured!"]] call bis_fnc_showNotification;
     capture_island_obj setTaskState "Succeeded";
     sleep 3;

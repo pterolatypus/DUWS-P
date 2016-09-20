@@ -55,21 +55,6 @@ sleep 5;
 
 _fob = "Land_Cargo_HQ_V1_F" createVehicle _foundPickupPos;
 
-/*DUWS_fnc_fob = {
-	_this addaction ["<t color='#ff00ff'>Player stats</t>","dialog\info\info.sqf", "", 0, true, true, "", "_this == player"];
-	_this addaction ["<t color='#15ff00'>Request ammobox drop(2CP)</t>","support\fob_ammobox.sqf", "", 0, true, true, "", "_this == player"];
-	_this addaction ["<t color='#ffb700'>Squad manager</t>","dialog\squad\squadmng.sqf", "", 0, true, true, "", "_this == player"];
-	_this addaction ["<t color='#ffb700'>FOB manager</t>","dialog\fob\FOBmanageropen.sqf", "", 0, true, true, "", "_this == player"];
-	if (support_armory_available) then {
-    ["AmmoboxInit",[_this, true]] spawn BIS_fnc_arsenal;
-  };
-  if (isServer) then {
-      _this addaction ["<t color='#00b7ff'>Rest (wait/save)</t>",{ [] call DUWSR_fnc_restServer }, "", 0, true, true, "", "_this == player"];
-  } else {
-      _this addaction ["<t color='#00b7ff'>Rest</t>",{ [] call DUWSR_fnc_restClient }, "", 0, true, true, "", "_this == player"];
-  };
-};*/
-//[_fob,"DUWS_fnc_fob",true,true] spawn BIS_fnc_MP;
 [_fob] remoteExecCall ["DUWSR_fnc_addFobActions", 0, true];
 [missionNamespace, _createdFOB] remoteExecCall ["BIS_fnc_addRespawnPosition", 0, true];
 

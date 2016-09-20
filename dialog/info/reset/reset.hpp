@@ -40,7 +40,7 @@ class reset_confirm
             colorBackground[] = {1, 0, 0,0.5};
             colorBackgroundActive[] = {1,0.2,0.2,1};
             colorFocused[] = {1,0.2,0.2,0};
-            action = "_hurr = [] execVM ""persistent\persistent_stats_reset.sqf""";
+            action = "call persistent_fnc_resetStats";
         };
         class no_button: RscButton
         {

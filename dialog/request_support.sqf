@@ -88,11 +88,6 @@ switch (_index2) do {
                 ctrlSetText [1000, format["%1",commandpointsblu1]];
                 lbSetColor [2103, index_support_armory, [0, 1, 0, 1]];
                 support_armory_available = true;
-                ["AmmoboxInit",[hq_blu1, true]] spawn BIS_fnc_arsenal;
-                {
-                    ["AmmoboxInit",[_x, true]] spawn BIS_fnc_arsenal;
-                } forEach (Array_of_FOBS);
-                //call Platypus_fnc_setAmmoBoxItems;
 
                 playSound "loadgun";
                 publicVariable "support_armory_available";

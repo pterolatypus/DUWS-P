@@ -1,4 +1,4 @@
-_place   =   _this select 0; 
+_place   =   _this select 0;
 _points =   _this select 1;
 _markername = _this select 2;
 _markername2 = _this select 3;
@@ -17,7 +17,7 @@ _index = 0;
     if ((_x select 0 == _triggerPos select 0) && (_x select 1 == _triggerPos select 1) && (_x select 2 == _triggerPos select 2)) exitWith {
         WARCOM_zones_controled_by_OPFOR set [_index,-1];
         WARCOM_zones_controled_by_OPFOR = WARCOM_zones_controled_by_OPFOR - [-1];
-    }; 
+    };
     _index = _index + 1;
 } forEach WARCOM_zones_controled_by_OPFOR;
 
@@ -38,7 +38,7 @@ WARCOM_blufor_ap = WARCOM_blufor_ap + _points;
 publicVariable "WARCOM_blufor_ap";
 
 // ADD PERSISTENT STAT
-_addzone = [] execVM "persistent\persistent_stats_zones_add.sqf";
+_addzone = call persistent_fnc_incrementCapturedZones;
 
 // MODIFY MARKER ICON
 str(_markername) setMarkerColor "ColorGreen";

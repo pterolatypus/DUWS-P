@@ -1,6 +1,6 @@
-"savegameNumber" addPublicVariableEventHandler {[] call DUWSR_fnc_restClient};
-"capturedZonesNumber" addPublicVariableEventHandler {[] execVM "persistent\persistent_stats_zones_add.sqf";}; // change the shown CP for request dialog
-"finishedMissionsNumber" addPublicVariableEventHandler {[] execVM "persistent\persistent_stats_missions_total.sqf";}; // change the shown CP for request dialog
+"savegameNumber" addPublicVariableEventHandler { call DUWSR_fnc_restClient };
+"capturedZonesNumber" addPublicVariableEventHandler { call persistent_fnc_incrementCapturedZones }; // change the shown CP for request dialog
+"finishedMissionsNumber" addPublicVariableEventHandler { call persistent_fnc_incrementCompletedMissions }; // change the shown CP for request dialog
 
 // WHEN CLIENT CONNECTS INIT (might need sleep)
 waitUntil {isPlayer Player};

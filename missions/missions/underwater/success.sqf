@@ -37,4 +37,4 @@ finishedMissionsNumber = finishedMissionsNumber + 1;
 publicVariable "finishedMissionsNumber";
 
 // ADD PERSISTENT STAT
-_addmission = [] execVM "persistent\persistent_stats_missions_total.sqf";
+_addmission = call persistent_fnc_incrementCompletedMissions;

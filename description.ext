@@ -1,7 +1,7 @@
 OnLoadMission = "A procedurally generated campaign where you earn resources, execute missions and lead the BLUFOR forces to capture the island and win the war.";
-onLoadName = "Dynamic Universal WAR System - Rebirth (DUWS-R) - Platypus Edition";
+onLoadName = "Dynamic Universal WAR System - Platypus Edition";
 dev = "dev";
-author = "DUWS-R Team, Pterolatypus";
+author = "Pterolatypus, DUWS-R Team, Kibot";
 overviewText = "A procedurally generated campaign where you earn resources, execute missions and lead the BLUFOR forces to capture the island and win the war. Play the way you want: be a spec ops, a squad leader or control a whole army, the choice is yours.";
 overviewPicture = "rtipic.paa";
 LoadScreen = "rtipic.paa";
@@ -27,12 +27,11 @@ disabledAI = 1;
 #include "dialog\operative\identities.hpp"
 #include "dialog\operative\operative.hpp"
 #include "params.hpp"
-/*#include "taw_vd\dialog.hpp"*/
 
 class CfgFunctions
 {
-  /*#include "taw_vd\CfgFunctions.hpp"*/
   #include "logsqf\CfgFunctions.hpp"
   #include "platypus\CfgFunctions.hpp"
   #include "DUWSR\CfgFunctions.hpp"
+  #include "persistent\CfgFunctions.hpp"
 };

@@ -3,7 +3,7 @@ _missionPos = _arguments select 0;
 _mission_name = _arguments select 1;
 _markername = _arguments select 2;
 _markername2 = _arguments select 3;
-  
+
 _action = _this select 2;
 _object = _this select 0;
 
@@ -32,7 +32,7 @@ publicVariable "commandpointsblu1";
 publicVariable "WARCOM_blufor_ap";
 finishedMissionsNumber = finishedMissionsNumber + 1;
 publicVariable "finishedMissionsNumber";
-_operHandler = execVM "dialog\operative\operative_mission_complete.sqf"; 
+_operHandler = execVM "dialog\operative\operative_mission_complete.sqf";
 
 // ADD PERSISTENT STAT
-_addmission = [] execVM "persistent\persistent_stats_missions_total.sqf";
+_addmission = call persistent_fnc_incrementCompletedMissions;

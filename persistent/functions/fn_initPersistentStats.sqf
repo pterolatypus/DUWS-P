@@ -42,4 +42,4 @@ mission_DUWS_firstlaunch = profileNamespace getVariable "profile_DUWS_firstlaunc
 
 // Lance l'init de l'xp
 _handle = [] execVM "persistent\experience\experience_init.sqf";
-waitUntil {scriptDone _handle};
+//waitUntil {scriptDone _handle};

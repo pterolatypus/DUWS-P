@@ -97,7 +97,7 @@ publicVariable "finishedMissionsNumber";
 _operHandler = execVM "dialog\operative\operative_mission_complete.sqf";
 
 // ADD PERSISTENT STAT
-_addmission = [] execVM "persistent\persistent_stats_missions_total.sqf";
+_addmission = call persistent_fnc_incrementCompletedMissions;
 
 sleep 2;
 deleteVehicle _box3;

@@ -29,7 +29,7 @@ _sol1 switchMove "AmovPpneMstpSnonWnonDnon";
 _sol2 switchMove "AmovPpneMstpSnonWnonDnon";
 _sol3 switchMove "AmovPpneMstpSnonWnonDnon";
 [_sol1, _sol2, _sol3] joinSilent player;
-titleText ["Thanks for the rescue, we'll be fighting with you from now on, lead the way!", "PLAIN DOWN"]; 
+titleText ["Thanks for the rescue, we'll be fighting with you from now on, lead the way!", "PLAIN DOWN"];
 
 sleep 5;
 
@@ -44,7 +44,7 @@ commandpointsblu1 = commandpointsblu1 + reward;
 WARCOM_blufor_ap = WARCOM_blufor_ap + 15;
 publicVariable "commandpointsblu1";
 publicVariable "WARCOM_blufor_ap";
-_operHandler = execVM "dialog\operative\operative_mission_complete.sqf"; 
+_operHandler = execVM "dialog\operative\operative_mission_complete.sqf";
 
 // ADD PERSISTENT STAT
-_addmission = [] execVM "persistent\persistent_stats_missions_total.sqf";
+_addmission = call persistent_fnc_incrementCompletedMissions;
