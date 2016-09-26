@@ -24,8 +24,8 @@ _index = 0;
 // ADD POINTS
 if (isServer) then {
     _points = round(_points/3);
-    commandpointsblu1 = commandpointsblu1 + _points;
-    publicVariable "commandpointsblu1";
+    DUWSP_Core_bluforCommandPoints = DUWSP_Core_bluforCommandPoints + _points;
+    publicVariable "DUWSP_Core_bluforCommandPoints";
 };
 
 // ADD NUMBER OF CONTROLLED ZONES
@@ -38,7 +38,7 @@ WARCOM_blufor_ap = WARCOM_blufor_ap + _points;
 publicVariable "WARCOM_blufor_ap";
 
 // ADD PERSISTENT STAT
-_addzone = call persistent_fnc_incrementCapturedZones;
+_addzone = call DUWSP_Persistency_fnc_incrementCapturedZones;
 
 // MODIFY MARKER ICON
 str(_markername) setMarkerColor "ColorGreen";

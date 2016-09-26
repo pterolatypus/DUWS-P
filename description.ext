@@ -31,7 +31,5 @@ disabledAI = 1;
 class CfgFunctions
 {
   #include "logsqf\CfgFunctions.hpp"
-  #include "platypus\CfgFunctions.hpp"
-  #include "DUWSR\CfgFunctions.hpp"
-  #include "persistent\CfgFunctions.hpp"
+  #include "DUWSP\CfgFunctions.hpp"
 };

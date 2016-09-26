@@ -21,8 +21,8 @@ hint "Coordinates received, splash in 30 seconds";
 
 
 
-commandpointsblu1 = commandpointsblu1 - _cost;
-publicVariable "commandpointsblu1";
+DUWSP_Core_bluforCommandPoints = DUWSP_Core_bluforCommandPoints - _cost;
+publicVariable "DUWSP_Core_bluforCommandPoints";
 
 sleep 30;
 

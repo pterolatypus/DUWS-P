@@ -1,7 +1,7 @@
 params [["_center", [x_mapsize/2, y_mapsize/2]], ["_min_distance", 500], ["_max_distance", 10000], ["_num_locations", 6], ["_max_combine_range", 400], ["_precision", 0.01]];
 
 //number of positions to initially generate
-_n = 500;
+_n = 1000;
 
 //find _n random map positions which are near houses
 _places = selectBestPlaces [_center, _max_distance, "houses", _precision, _n];

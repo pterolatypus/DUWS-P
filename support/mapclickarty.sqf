@@ -16,7 +16,7 @@ _timer = 60;
 clicked = false;
 
 // IF NOT ENOUGH PTS
-if (commandpointsblu1<_cost) exitWith {
+if (DUWSP_Core_bluforCommandPoints<_cost) exitWith {
   ["info",["Support","You don't have enough command points"]] call bis_fnc_showNotification;
   sleep 30;
 if (_supportype==1) exitWith {

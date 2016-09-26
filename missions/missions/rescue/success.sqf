@@ -40,11 +40,11 @@ publicVariable "finishedMissionsNumber";
 ["TaskSucceeded",["","Rescue the friendly troops"]] call bis_fnc_showNotification;
 ["cpaddedmission",[reward]] call bis_fnc_showNotification;
 missions_success = missions_success + 1;
-commandpointsblu1 = commandpointsblu1 + reward;
+DUWSP_Core_bluforCommandPoints = DUWSP_Core_bluforCommandPoints + reward;
 WARCOM_blufor_ap = WARCOM_blufor_ap + 15;
-publicVariable "commandpointsblu1";
+publicVariable "DUWSP_Core_bluforCommandPoints";
 publicVariable "WARCOM_blufor_ap";
 _operHandler = execVM "dialog\operative\operative_mission_complete.sqf";
 
 // ADD PERSISTENT STAT
-_addmission = call persistent_fnc_incrementCompletedMissions;
+_addmission = call DUWSP_Persistency_fnc_incrementCompletedMissions;

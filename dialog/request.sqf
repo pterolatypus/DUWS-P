@@ -1,13 +1,13 @@
 _handle = createDialog "ressourceheader";
 waitUntil {dialog};
-ctrlSetText [1000, format["%1",commandpointsblu1]];
+ctrlSetText [1000, format["%1",DUWSP_Core_bluforCommandPoints]];
 ctrlSetText [1001, format["%1",zoneundercontrolblu]];
 ctrlSetText [1002, format["%1",WARCOM_blufor_ap]];
 
 
 // UNITS
 if (isNil "spawnableUnits") then {
-  spawnableUnits = call compileFinal preprocessFileLineNumbers "Platypus\cfg\unitList.sqf";
+  spawnableUnits = call compileFinal preprocessFileLineNumbers "DUWSP\Core\cfg\unitList.sqf";
   //spawnableGroups = (missionConfigFile >> "CfgMission" >> "Platypus" >> "cfg" >> "unitList");
 };
 
@@ -19,7 +19,7 @@ lbSetCurSel [2100, 0];
 
 // SQUADS
 if (isNil "spawnableGroups") then {
-  spawnableGroups = call compileFinal preprocessFileLineNumbers "Platypus\cfg\squadList.sqf";
+  spawnableGroups = call compileFinal preprocessFileLineNumbers "DUWSP\Core\cfg\squadList.sqf";
   /*spawnableGroups = call compileFinal preprocessFileLineNumbers (missionConfigFile >> "CfgMission" >> "Platypus" >> "cfg" >> "squadList");*/
   /*spawnableGroups = (missionConfigFile >> "CfgMission" >> "Platypus" >> "cfg" >> "squadList");*/
 };
@@ -39,7 +39,7 @@ if (isNil "squadNumbers") then {
 
 // VEHICLES
 if (isNil "spawnableVehicles") then {
-  spawnableVehicles = call compileFinal preprocessFileLineNumbers "Platypus\cfg\vehicleList.sqf";
+  spawnableVehicles = call compileFinal preprocessFileLineNumbers "DUWSP\Core\cfg\vehicleList.sqf";
   /*spawnableGroups = (missionConfigFile >> "CfgMission" >> "Platypus" >> "cfg" >> "vehicleList");*/
 };
 
@@ -52,7 +52,7 @@ lbSetCurSel [2102, 0];
 //Custom supports probably take a lot of scripting work,
 //I may look at it later
 // Supports  !!! CHECK TO ADD AT INIT
-index_support_supply = lbAdd [2103, "Supply drop(5CP)"];                      // 0
+/*index_support_supply = lbAdd [2103, "Supply drop(5CP)"];                      // 0
 index_support_arty = lbAdd [2103, "Artillery strike(20CP)"];                  // 1
 index_support_mortar = lbAdd [2103, "Mortar strike(10CP)"];                   // 2
 index_support_paradrop = lbAdd [2103, "Airborne troops(20CP)"];               // 3
@@ -65,7 +65,12 @@ index_support_helotaxi = lbAdd [2103, "Helicopter Taxi(3CP)"];                //
 index_support_cluster = lbAdd [2103, "Mk.20 II CBU(25CP)"];                   // 10
 index_support_training = lbAdd [2103, "Specialized Infantry training(20CP)"]; // 11
 index_support_boattaxi = lbAdd [2103, "Boat Taxi(2CP)"];                  // 12
-index_support_vehicledrop = lbAdd [2103, "Offroad Drop (4CP)"];
+index_support_vehicledrop = lbAdd [2103, "Offroad Drop (4CP)"];*/
+
+supports = call compileFinal preprocessFileLineNumbers "DUWSP\Core\cfg\supportList.sqf";
+{
+  lbAdd [2103, format["%1 (%2 CP)", _x select 1, _x select 2]];
+} forEach supports;
 
 //  lbSetCurSel [2103, 0];
 if (support_supplydrop_available) then {

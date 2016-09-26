@@ -4,9 +4,9 @@ _object = _this select 0;
 _fob = (_this select 3) select 1;
 aliveAllUnits = {alive _x} count allunits;
 
-if (commandpointsblu1 < 4) exitWith {hint "You don't have enough Command Points"};
-commandpointsblu1 = commandpointsblu1 - 4;
-publicvariable "commandpointsblu1";
+if (DUWSP_Core_bluforCommandPoints < 4) exitWith {hint "You don't have enough Command Points"};
+DUWSP_Core_bluforCommandPoints = DUWSP_Core_bluforCommandPoints - 4;
+publicvariable "DUWSP_Core_bluforCommandPoints";
 
 
 if ((Warcom_Limiter_Param == 1) && (aliveAllUnits>99)) exitWith {hint "*DUWS AI Limiter is ENABLED!*\n\nTry Fortifying again when there are less than 100 AI units on the map"};

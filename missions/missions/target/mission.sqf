@@ -43,7 +43,7 @@ _taskhandle setSimpleTaskDescription ["A high enemy target has been spotted some
 _taskhandle setSimpleTaskDestination (getMarkerPos str(_markername));
 
 if (!ismultiplayer) then {
-    [] call DUWSR_fnc_saveGame;
+    [] call DUWSP_fnc_saveGame;
 };
 
 ["TaskAssigned",["",_mission_name]] call bis_fnc_showNotification;
@@ -64,9 +64,9 @@ reward = (20 * cp_reward_multiplier);
 ["cpaddedmission",[reward]] call bis_fnc_showNotification;
 WARCOM_blufor_ap = WARCOM_blufor_ap + 20;
 missions_success = missions_success + 1;
-commandpointsblu1 = commandpointsblu1 + reward;
+DUWSP_Core_bluforCommandPoints = DUWSP_Core_bluforCommandPoints + reward;
 opfor_ap = opfor_ap - 20;
-publicVariable "commandpointsblu1";
+publicVariable "DUWSP_Core_bluforCommandPoints";
 publicVariable "WARCOM_blufor_ap";
 finishedMissionsNumber = finishedMissionsNumber + 1;
 publicVariable "finishedMissionsNumber";

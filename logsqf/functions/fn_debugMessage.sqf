@@ -1,6 +1,15 @@
-_msg = _this select 0;
-_level = _this select 1;
+params ["_msg", "_level", ["_force", false]];
 
-if (_level call logsqf_fnc_showDebug) then {
-    player globalChat (format _msg);
+if (_force || (_level call logsqf_fnc_showDebug)) then {
+    switch ( typeName _msg ) do {
+      case "ARRAY": {
+        player globalChat (format _msg);
+      };
+      case "STRING": {
+        player globalChat _msg;
+      };
+      default {
+        [str _msg, _level] call logsqf_fnc_debugMessage;
+      };
+    }
 };

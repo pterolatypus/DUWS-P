@@ -19,12 +19,12 @@ _proceed = true;
 switch (_selected_soldier_status) do
 {
     case "Ready": {
-        if (commandpointsblu1<5) exitWith {_proceed = false;};
-        commandpointsblu1 = commandpointsblu1 - 5;
+        if (DUWSP_Core_bluforCommandPoints<5) exitWith {_proceed = false;};
+        DUWSP_Core_bluforCommandPoints = DUWSP_Core_bluforCommandPoints - 5;
     };
     case "Healed": {
-        if (commandpointsblu1<2) exitWith {_proceed = false;};
-        commandpointsblu1 = commandpointsblu1 - 2;
+        if (DUWSP_Core_bluforCommandPoints<2) exitWith {_proceed = false;};
+        DUWSP_Core_bluforCommandPoints = DUWSP_Core_bluforCommandPoints - 2;
     };
 };
 

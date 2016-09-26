@@ -1,13 +1,12 @@
-_location = _this select 0;
+params ["_location"];
 
-
-if (commandpointsblu1<4) exitWith
+if (DUWSP_Core_bluforCommandPoints<4) exitWith
 {
   ["info",["Not enough command points","Not enough Command Points (4CP required)"]] call bis_fnc_showNotification;
 };
 
-commandpointsblu1 = commandpointsblu1 - 4;
-publicVariable "commandpointsblu1";
+DUWSP_Core_bluforCommandPoints = DUWSP_Core_bluforCommandPoints - 4;
+publicVariable "DUWSP_Core_bluforCommandPoints";
 
 hint "An offroad has been dropped near your location";
 

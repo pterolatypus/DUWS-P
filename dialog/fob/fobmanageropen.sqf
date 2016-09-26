@@ -26,7 +26,7 @@ _index = -1;
 _hqpos = getpos hq_blu1;
 _listFT = _listFT + [[_hqpos,"Main base"]];
 
-if (enable_fast_travel) then {  
+if (DUWSP_Core_cfgEnableFOBTeleport) then {  
     // FOB FT
     {
         _fobname = _x select 1;

@@ -34,7 +34,7 @@ _taskhandle setSimpleTaskDescription ["We have detected a large amount of enemy 
 _taskhandle setSimpleTaskDestination (getMarkerPos str(_markername));
 
 if (!ismultiplayer) then {
-    [] call DUWSR_fnc_saveGame;
+    [] call DUWSP_fnc_saveGame;
 };
 
 ["TaskAssigned",["",_mission_name]] call bis_fnc_showNotification;
@@ -58,13 +58,13 @@ player removeSimpleTask _taskhandle;
 reward = (30 * cp_reward_multiplier);
 ["TaskSucceeded",["",_mission_name]] call bis_fnc_showNotification;
 ["cpaddedmission",[reward]] call bis_fnc_showNotification;
-commandpointsblu1 = commandpointsblu1 + reward;
+DUWSP_Core_bluforCommandPoints = DUWSP_Core_bluforCommandPoints + reward;
 missions_success = missions_success + 1;
 WARCOM_blufor_ap = WARCOM_blufor_ap + 30;
 opfor_ap = opfor_ap - 30;
 finishedMissionsNumber = finishedMissionsNumber + 1;
 publicVariable "finishedMissionsNumber";
-publicVariable "commandpointsblu1";
+publicVariable "DUWSP_Core_bluforCommandPoints";
 publicVariable "WARCOM_blufor_ap";
 _operHandler = execVM "dialog\operative\operative_mission_complete.sqf";
 

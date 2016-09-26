@@ -1,7 +1,7 @@
 _position = _this select 0;
 _size = _this select 1;
 
-if (commandpointsblu1 < 10) exitWith {
+if (DUWSP_Core_bluforCommandPoints < 10) exitWith {
   ["info",["Not enough command points","Not enough Command Points (10CP required)"]] call bis_fnc_showNotification;
   sleep 15;
   _art = [player1,"fob_support"] call BIS_fnc_addCommMenuItem;
@@ -33,8 +33,8 @@ if (0 == _foundPickupPos select 0 && 0 == _foundPickupPos select 1) exitWith {hi
 
 // LA ZONE EST OK
 
-commandpointsblu1 = commandpointsblu1 - 10;
-publicVariable "commandpointsblu1";
+DUWSP_Core_bluforCommandPoints = DUWSP_Core_bluforCommandPoints - 10;
+publicVariable "DUWSP_Core_bluforCommandPoints";
 PAPABEAR sidechat "Roger that, the FOB is being deployed...";
 
 _fobname = [] call Platypus_fnc_getRandomCallsign;
@@ -55,7 +55,7 @@ sleep 5;
 
 _fob = "Land_Cargo_HQ_V1_F" createVehicle _foundPickupPos;
 
-[_fob] remoteExecCall ["DUWSR_fnc_addFobActions", 0, true];
+[_fob] remoteExecCall ["DUWSP_fnc_addFobActions", 0, true];
 [missionNamespace, _createdFOB] remoteExecCall ["BIS_fnc_addRespawnPosition", 0, true];
 
 // For fortifying

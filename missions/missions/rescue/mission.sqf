@@ -43,7 +43,7 @@ _taskhandle setSimpleTaskDescription ["One of our patrols has been ambushed and 
 _taskhandle setSimpleTaskDestination (getMarkerPos str(_markername));
 
 if (!ismultiplayer) then {
-    [] call DUWSR_fnc_saveGame;
+    [] call DUWSP_fnc_saveGame;
 };
 
 ["TaskAssigned",["",_mission_name]] call bis_fnc_showNotification;

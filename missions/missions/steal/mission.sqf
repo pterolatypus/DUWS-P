@@ -49,7 +49,7 @@ _taskhandle setSimpleTaskDescription ["An enemy truck full of supplies has been 
 _taskhandle setSimpleTaskDestination (getMarkerPos str(_markername));
 
 if (!ismultiplayer) then {
-    [] call DUWSR_fnc_saveGame;
+    [] call DUWSP_fnc_saveGame;
 };
 
 ["TaskAssigned",["",_mission_name]] call bis_fnc_showNotification;
@@ -87,10 +87,10 @@ reward = (25 * cp_reward_multiplier);
 ["TaskSucceeded",["",_mission_name]] call bis_fnc_showNotification;
 ["cpaddedmission",[reward]] call bis_fnc_showNotification;
 missions_success = missions_success + 1;
-commandpointsblu1 = commandpointsblu1 + reward;
+DUWSP_Core_bluforCommandPoints = DUWSP_Core_bluforCommandPoints + reward;
 WARCOM_blufor_ap = WARCOM_blufor_ap + 25;
 opfor_ap = opfor_ap - 25;
-publicVariable "commandpointsblu1";
+publicVariable "DUWSP_Core_bluforCommandPoints";
 publicVariable "WARCOM_blufor_ap";
 finishedMissionsNumber = finishedMissionsNumber + 1;
 publicVariable "finishedMissionsNumber";

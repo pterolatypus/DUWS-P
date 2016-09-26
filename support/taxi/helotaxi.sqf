@@ -6,7 +6,7 @@ taxiCanTakeOff = false;
 _music = call compile preprocessFile "support\taxi\random_music.sqf";
 
 
-if (commandpointsblu1 < 1) exitWith {
+if (DUWSP_Core_bluforCommandPoints < 1) exitWith {
   ["info",["Not enough command points","Not enough Command Points (1 CP required)"]] call bis_fnc_showNotification;
   sleep 15;
   _art = [player,"helo_taxi"] call BIS_fnc_addCommMenuItem;
@@ -21,8 +21,8 @@ if (0 == _foundPickupPos select 0 && 0 == _foundPickupPos select 1) exitWith {hi
 
 
 // A POS NEAR THE PLAYER HAS BEEN FOUND, CHOOPA EN ROUTE
-commandpointsblu1 = commandpointsblu1 - 1;
-publicVariable "commandpointsblu1";
+DUWSP_Core_bluforCommandPoints = DUWSP_Core_bluforCommandPoints - 1;
+publicVariable "DUWSP_Core_bluforCommandPoints";
 
 // create marker on LZ
 _markerpickup = format["lz%1%2",_foundPickupPos]; // Define marker name
@@ -152,7 +152,7 @@ sleep 15;
 _art = [player,"helo_taxi"] call BIS_fnc_addCommMenuItem;
 };
 // *****************************
-if (enableChopperFastTravel) then {
+if (DUWSP_Core_cfgHeloTaxiCanTeleport) then {
 // TELEPORT HELO NEAR LZ
 deleteVehicle _helipad1;
 titleText ["En route to LZ...", "BLACK OUT", 3];

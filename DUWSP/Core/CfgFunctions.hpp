@@ -1,7 +1,13 @@
-class Platypus {
+class Core {
   class Functions {
-    tag = "Platypus"
-    file = "platypus\functions";
+    tag = "DUWSP_Core";
+    file = "DUWSP\Core\functions";
+    class initVariables {};
+    class getMapSize {};
+    class saveGame {};
+    class restClient {};
+    class restServer {};
+    class addFobActions {};
     class findUrbanZones { description = "Returns a list of locations corresponding to the most urban areas on the map, slightly randomised" };
     class currentBuilding { description = "Returns the building the player is currently inside, determined as the closest building IF that building intersects their modelToWorldVisual" };
     class spawnCCP { description = "Attempts to place a CCP in the player's current building, consuming one PAK if successful" };
@@ -11,6 +17,5 @@ class Platypus {
     class getRandomCallsign {};
     class showFirstLaunchHelp {};
     class addDiaryEntries {};
-    /*class initAmmoBox {};*/
   };
 };

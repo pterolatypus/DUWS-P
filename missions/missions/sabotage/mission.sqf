@@ -35,7 +35,7 @@ _taskhandle setSimpleTaskDescription ["The enemy is using a power supply somewhe
 _taskhandle setSimpleTaskDestination (getMarkerPos str(_markername));
 
 if (!ismultiplayer) then {
-   [] call DUWSR_fnc_saveGame;
+   [] call DUWSP_fnc_saveGame;
 };
 
 ["TaskAssigned",["",_mission_name]] call bis_fnc_showNotification;

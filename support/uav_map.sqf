@@ -1,8 +1,8 @@
 _centerPos = _this select 0;
 _checkedRadius = _this select 1;
 
-commandpointsblu1 = commandpointsblu1 - 3;
-publicVariable "commandpointsblu1";
+DUWSP_Core_bluforCommandPoints = DUWSP_Core_bluforCommandPoints - 3;
+publicVariable "DUWSP_Core_bluforCommandPoints";
 
 // CREATE MARKER FOR CHECKED SIZE
 _markername = format["%1%2vc",round(_centerPos select 0),round(_centerPos select 1)]; // Define marker name

@@ -15,8 +15,8 @@ zones_number = (cfg_num_zones_list select 0) select _index;
 
 // Starting CP
 _index = lbCurSel 2103;
-commandpointsblu1 = (cfg_starting_cp_list select 0) select _index;
-[["Starting CP: %1", commandpointsblu1], "DEBUG"] call logsqf_fnc_debugMessage;
+DUWSP_Core_bluforCommandPoints = (cfg_starting_cp_list select 0) select _index;
+[["Starting CP: %1", DUWSP_Core_bluforCommandPoints], "DEBUG"] call logsqf_fnc_debugMessage;
 
 // Weather type
 _index = lbCurSel 2106;
@@ -52,14 +52,14 @@ blufor_ai_skill = (cfg_blufor_skill_list select 0) select _index;
 
 // ENABLE CHOPPER FAST TRAVEL
 _index = lbCurSel 2109;
-enableChopperFastTravel = ((cfg_chopper_travel_list select 0) select _index)=="Yes";
-[["Heli fast travel enabled: %1", enableChopperFastTravel], "DEBUG"] call logsqf_fnc_debugMessage;
+DUWSP_Core_cfgHeloTaxiCanTeleport = ((cfg_chopper_travel_list select 0) select _index)=="Yes";
+[["Heli fast travel enabled: %1", DUWSP_Core_cfgHeloTaxiCanTeleport], "DEBUG"] call logsqf_fnc_debugMessage;
 
 
 // FAST TRAVEL
 _index = lbCurSel 2714;
-enable_fast_travel = ((cfg_fast_travel_list select 0) select _index)=="Yes";
-[["FOB fast travel enabled: %1", enable_fast_travel], "DEBUG"] call logsqf_fnc_debugMessage;
+DUWSP_Core_cfgEnableFOBTeleport = ((cfg_fast_travel_list select 0) select _index)=="Yes";
+[["FOB fast travel enabled: %1", DUWSP_Core_cfgEnableFOBTeleport], "DEBUG"] call logsqf_fnc_debugMessage;
 
 
 // MAX DIST FROM HQ
@@ -76,8 +76,8 @@ cp_reward_multiplier = (cfg_cp_reward_list select 0) select _index;
 if (zones_max_radius <= zones_min_radius) exitWith {Hint "Unable to generate campaign:\nMaximum radius of a zone\nmust be superior to\nMinimum radius of a zone"};
 
 zones_spacing = zones_max_radius + 200;
-publicVariable "commandpointsblu1";
+publicVariable "DUWSP_Core_bluforCommandPoints";
 publicVariable "weather_type";
 publicVariable "blufor_ai_skill";
 publicVariable "opfor_ai_skill";
-publicVariable "enableChopperFastTravel";
+publicVariable "DUWSP_Core_cfgHeloTaxiCanTeleport";

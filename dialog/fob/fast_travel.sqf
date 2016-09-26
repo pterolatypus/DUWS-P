@@ -1,4 +1,4 @@
-if (!enable_fast_travel) exitWith {hint "Fast travel is disabled"};
+if (!DUWSP_Core_cfgEnableFOBTeleport) exitWith {hint "Fast travel is disabled"};
 
 //// CREATE THE ARRAY OF FOBS w/ POSITION
 _array_of_fobs_list = [];  // init the array of fobs

@@ -10,7 +10,7 @@ _fob addaction ["<t color='#ffb700'>Squad manager</t>","dialog\squad\squadmng.sq
 _fob addaction ["<t color='#ffb700'>FOB manager</t>","dialog\fob\FOBmanageropen.sqf", "", 0, true, true, "", "_this == player"];
 
 if (isServer) then {
-  _fob addaction ["<t color='#00b7ff'>Rest (wait/save)</t>",{ [] call DUWSR_fnc_restServer }, "", 0, true, true, "", "_this == player"];
+  _fob addaction ["<t color='#00b7ff'>Rest (wait/save)</t>",{ [] call DUWSP_fnc_restServer }, "", 0, true, true, "", "_this == player"];
   } else {
-    _fob addaction ["<t color='#00b7ff'>Rest</t>",{ [] call DUWSR_fnc_restClient }, "", 0, true, true, "", "_this == player"];
+    _fob addaction ["<t color='#00b7ff'>Rest</t>",{ [] call DUWSP_fnc_restClient }, "", 0, true, true, "", "_this == player"];
   };

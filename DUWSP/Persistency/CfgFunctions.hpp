@@ -1,11 +1,11 @@
-class Persistent {
+class Persistency {
   class Functions {
-      tag = "persistent"
-      file = "persistent\functions";
+      tag = "DUWSP_Persistency";
+      file = "DUWSP\Persistency\functions";
       class initPersistentStats { preinit = 1 };
       class addMissionWin {};
       class resetStats {};
       class incrementCompletedMissions {};
       class incrementCapturedZones {};
-  }
-}
+  };
+};

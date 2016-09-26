@@ -5,7 +5,7 @@ player setdammage 0;
 if (isServer) then {
     skiptime 6;
     sleep 0.3;
-    [] call DUWSR_fnc_saveGame;
+    [] call DUWSP_fnc_saveGame;
 
     hint "You and your squad members have been fully healed";
     savegameNumber = savegameNumber + 1;

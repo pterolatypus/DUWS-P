@@ -1,7 +1,7 @@
 DUWS_host_start = false;
 publicVariable "DUWS_host_start";
 waitUntil {time > 0.1};
-_getsize_script = [player] spawn DUWSR_fnc_getMapSize;
+_getsize_script = [player] spawn DUWSP_fnc_getMapSize;
 DUWS_host_start = true;
 publicVariable "DUWS_host_start";
 

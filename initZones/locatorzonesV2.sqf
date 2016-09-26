@@ -95,7 +95,7 @@ _warcom_init = [_zones_array, getpos hq_blu1, [0,0,0], blufor_ap, opfor_ap, 2700
 waitUntil {scriptDone _warcom_init};
 sleep 0.1;
 
-[] call DUWSR_fnc_saveGame;
+[] call DUWSP_fnc_saveGame;
 sleep 1;
 
 [[format["MISSION INITIALIZATION COMPLETE!<br/>Campaign generated<br/>Welcome to %1, %2",_worldName,profilename]]] spawn BIS_fnc_typeText;

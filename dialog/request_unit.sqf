@@ -9,10 +9,10 @@ _unitClass = _unit select 1;
 _cost = _unit select 2;
 _specialFunctions = _unit select 3;
 
-if (commandpointsblu1 >= _cost) then {
-    commandpointsblu1 = commandpointsblu1 - _cost;
-    publicVariable "commandpointsblu1";
-    ctrlSetText [1000, format["%1",commandpointsblu1]];
+if (DUWSP_Core_bluforCommandPoints >= _cost) then {
+    DUWSP_Core_bluforCommandPoints = DUWSP_Core_bluforCommandPoints - _cost;
+    publicVariable "DUWSP_Core_bluforCommandPoints";
+    ctrlSetText [1000, format["%1",DUWSP_Core_bluforCommandPoints]];
     _group = group player ;
     _newUnit = _unitClass createUnit [_spawnpos, _group, "", _skill, "private"];
     {_newUnit call _x;} forEach _specialFunctions;

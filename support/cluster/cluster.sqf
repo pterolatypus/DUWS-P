@@ -19,8 +19,8 @@ _rpsinit = _rps;
 
 //hint format["Position: %1\nSalvos:%2\nRadius:%3\nInterval:%4\nRPS:%5\nSupport type:%6\nCost:%7\nAmmo type:%8", _position, _salvos, _radius, _interval, _rps,_supportype,_cost,_ammotype];
 
-commandpointsblu1 = commandpointsblu1 - _cost;
-publicVariable "commandpointsblu1";
+DUWSP_Core_bluforCommandPoints = DUWSP_Core_bluforCommandPoints - _cost;
+publicVariable "DUWSP_Core_bluforCommandPoints";
 
 hint "Coordinates received !";
 

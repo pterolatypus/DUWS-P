@@ -28,12 +28,7 @@ diag_log format ["------------------ DUWS-R START ----v0------ player: %1", prof
 //
 //  3) Define these variables:
 
-// choose between "tropical" - "arid" - "temperate" - "temperate_cold" - "mediterranean"
-if (isNil "weather_type") then {weather_type = "tropical";};
-// set the skill range of ennemy AI
-if (isNil "opfor_ai_skill") then {opfor_ai_skill = [0.1,0.3];};
-// set the skill range of friendly AI, from 0 to 1 (0 being completely dumb)
-if (isNil "blufor_ai_skill") then {blufor_ai_skill = [0.4,0.7];};
+
 
 // you must specify if you have manually placed HQ or not. false = HQ is randomly placed, true = you have manually placed the HQ
 hq_manually_placed = false;
@@ -43,20 +38,13 @@ zones_max_dist_from_hq = 7500;
 dynamic_weather_enable = true;
 maually_chosen = false;
 
-if (isNil "enable_fast_travel") then { enable_fast_travel = true; };
-// chopper taxi (support) will fast travel (teleport) or not
-if (isNil "enableChopperFastTravel") then { enableChopperFastTravel = true; };
-// Starting CP
-if (isNil "commandpointsblu1") then { commandpointsblu1 = 20; };
-// STARTING ARMY POWER
-if (isNil "blufor_ap") then {blufor_ap = 0;};
-opfor_ap = 0;
 
 ///////////////////////////////////////////////////////
 // initialise variables
 //////////////////////////////////////////////////////
 // MOST OF THE VALUES ARE BEING OVERWRITTEN BY PLAYER INPUT AT THE BEGINNING
 //////////////////////////////////////////////////////
+[] call DUWSP_fnc_initVariables;
 
 /////////////////////////////////////////////////////////////
 logging_level = paramsArray select 0;  // logging level for debugging
@@ -93,65 +81,14 @@ clientisSync = false;
 fobSwitch = false;
 player_is_choosing_hqpos = false;
 
-if (isNil "amount_zones_created") then {
-    amount_zones_created = 0;
-};
 
-if (isNil "HQ_pos_found_generated") then {
-    HQ_pos_found_generated = false;
-};
-
-if (isNil "chosen_settings") then {
-    chosen_settings = false;
-};
-
-if (isNil "chosen_hq_placement") then {
-    chosen_hq_placement = false;
-};
-
-if (isNil "zoneundercontrolblu") then {
-	zoneundercontrolblu = 0;
-};
-
-if (isNil "amount_zones_captured") then {
-	amount_zones_captured = 0;
-};
-
-if (isNil "savegameNumber") then {
-	savegameNumber = 0;
-};
-
-if (isNil "capturedZonesNumber") then {
-	capturedZonesNumber = 0;
-};
-
-if (isNil "finishedMissionsNumber") then {
-	finishedMissionsNumber = 0;
-};
-
-if (isNil "OvercastVar") then {
-	OvercastVar = 0;
-};
-
-if (isNil "FogVar") then {
-	FogVar = 0;
-};
-
-if (isNil "Array_of_FOBS") then {
-	Array_of_FOBS = [];
-};
-
-
-if (isNil "Array_of_FOBname") then {
-	Array_of_FOBname = [];
-};
 
 player allowDamage false;
 
 #include "dialog\supports_init.hpp"
 
 if (!isMultiplayer) then {
-	getsize_script = [player] spawn DUWSR_fnc_getMapSize;
+	getsize_script = [player] spawn DUWSP_fnc_getMapSize;
 };
 
 // IF MP
@@ -161,25 +98,25 @@ if (isMultiplayer) then {
 	DUWSMP_CP_death_cost = paramsArray select 1;
 
 	PlayerKilledEH = player addEventHandler ["killed", {
-        commandpointsblu1 = commandpointsblu1 - DUWSMP_CP_death_cost;
-        publicVariable "commandpointsblu1";
+        DUWSP_Core_bluforCommandPoints = DUWSP_Core_bluforCommandPoints - DUWSMP_CP_death_cost;
+        publicVariable "DUWSP_Core_bluforCommandPoints";
     }];
 	"support_specialized_training_available" addPublicVariableEventHandler {lbSetColor [2103, 11, [0, 1, 0, 1]];};
 
-  "commandpointsblu1" addPublicVariableEventHandler {ctrlSetText [1000, format["%1",commandpointsblu1]]; };
+  "DUWSP_Core_bluforCommandPoints" addPublicVariableEventHandler {ctrlSetText [1000, format["%1",DUWSP_Core_bluforCommandPoints]]; };
 
 
 	if (!isServer) then {
-        "savegameNumber" addPublicVariableEventHandler { call DUWSR_fnc_restClient };
-        "capturedZonesNumber" addPublicVariableEventHandler { call persistent_fnc_incrementCapturedZones }; // change the shown CP for request dialog
-        "finishedMissionsNumber" addPublicVariableEventHandler { call persistent_fnc_incrementCompletedMissions }; // change the shown CP for request dialog
+        "savegameNumber" addPublicVariableEventHandler { call DUWSP_Core_fnc_restClient };
+        "capturedZonesNumber" addPublicVariableEventHandler { call DUWSP_Persistency_fnc_incrementCapturedZones }; // change the shown CP for request dialog
+        "finishedMissionsNumber" addPublicVariableEventHandler { call DUWSP_Persistency_fnc_incrementCompletedMissions }; // change the shown CP for request dialog
 	};
 
     if (isServer) then { // SERVER INIT
         DUWS_host_start = false;
         publicVariable "DUWS_host_start";
         waitUntil {time > 0.1};
-        _getsize_script = [player] spawn DUWSR_fnc_getMapSize;
+        _getsize_script = [player] spawn DUWSP_fnc_getMapSize;
         DUWS_host_start = true;
         publicVariable "DUWS_host_start";
 
@@ -270,7 +207,7 @@ player createDiaryRecord ["operativehelp", ["Skills", "<font color='#FF0000'>Aim
 player createDiaryRecord ["operativehelp", ["Recruiting operatives", "Operatives can be recruited at the HQ, inside the ""request unit"" menu. When you recruit someone for the first time, you'll have to spend 5 CP. However, once an operative has been already recruited, has been ""injured""(killed) in battle, you can recruit it again for only 2 CP after a delay between 20 and 80 minutes."]];
 player createDiaryRecord ["operativehelp", ["Overview", "You can recruit special operatives that will stay and progress with you for all the duration of the campaign. Some of these mens have special equipment, specialities and skills. Their skills will increase each time a zone is captured or a mission is accomplished, whether they're in your squad or not. However, when an operative is actually in the game, he will gain 10 spendable points wich can be assigned freely in any skill at the operative menu."]];*/
 _diaryEntries = call compileFinal preprocessFileLineNumbers "Platypus\cfg\diaryInfo.sqf";
-[_diaryEntries] call Platypus_fnc_addDiaryEntries;
+[_diaryEntries] call DUWSP_Core_fnc_addDiaryEntries;
 
 // MP notes
 if (isMultiplayer) then {
@@ -288,12 +225,12 @@ if (isMultiplayer) then {
 
 //Create main objective
 capture_island_obj = player createSimpleTask ["taskIsland"];
-capture_island_obj setSimpleTaskDescription ["The ennemy is controlling the island, we must take it back! Capture every zone under enemy control and the mission will succeed.<br />You can let your BLUFOR forces take the island by themselves and help them getting a bigger army by accomplishing side missions. Or you can capture the zones yourself and do all the big work. As the campaign progress, the war will escalate and the armies will get stronger and start to use bigger guns.<br />To capture a zone, you need to have more units inside the zone than the enemy.<br /><br />It's up to you on how you want to play this.<br />Good luck, soldier!","Take the island",""];
+capture_island_obj setSimpleTaskDescription ["The enemy is controlling the island, we must take it back! Capture every zone under enemy control and the mission will succeed.<br />You can let your BLUFOR forces take the island by themselves and help them getting a bigger army by accomplishing side missions. Or you can capture the zones yourself and do all the big work. As the campaign progress, the war will escalate and the armies will get stronger and start to use bigger guns.<br />To capture a zone, you need to have more units inside the zone than the enemy.<br /><br />It's up to you on how you want to play this.<br />Good luck, soldier!","Take the island",""];
 
 //Create win condition handler
 "zoneundercontrolblu" addPublicVariableEventHandler {
   if (zoneundercontrolblue >= amount_zones_created) then {
-    call persistent_fnc_addMissionWin;
+    call DUWSP_Persistency_fnc_addMissionWin;
     ["TaskSucceeded",["","Island captured!"]] call bis_fnc_showNotification;
     capture_island_obj setTaskState "Succeeded";
     sleep 3;
@@ -310,7 +247,7 @@ if (zones_manually_placed) then {
 if (mission_DUWS_firstlaunch) then {
     waitUntil {chosen_settings};
     sleep 8;
-    [] call Platypus_fnc_showFirstLaunchHelp;
+    [] call DUWSP_Core_fnc_showFirstLaunchHelp;
     profileNamespace setVariable ["profile_DUWS_firstlaunch", false];
     saveProfileNamespace;
 };

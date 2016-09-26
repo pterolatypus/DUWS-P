@@ -10,10 +10,10 @@ _vehicleClass = _requestedVehicle select 1;
 _cost = _requestedVehicle select 2;
 _specialFunctions = _requestedVehicle select 3;
 
-if (commandpointsblu1 >= _cost) then {
-      commandpointsblu1 = commandpointsblu1 - _cost;
-      publicVariable "commandpointsblu1";
-      ctrlSetText [1000, format["%1",commandpointsblu1]];
+if (DUWSP_Core_bluforCommandPoints >= _cost) then {
+      DUWSP_Core_bluforCommandPoints = DUWSP_Core_bluforCommandPoints - _cost;
+      publicVariable "DUWSP_Core_bluforCommandPoints";
+      ctrlSetText [1000, format["%1",DUWSP_Core_bluforCommandPoints]];
       _vehic = _vehicleClass createVehicle _spawnPos;
       _vehic call _specialFunctions;
       hint "Vehicle ready !";

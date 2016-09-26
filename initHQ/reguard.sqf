@@ -3,9 +3,9 @@ _groupPatrol = (_this select 3) select 1;
 _centerPos = (_this select 3) select 2;
 _hq = (_this select 3) select 3;
 
-if (commandpointsblu1>20) then {
-    commandpointsblu1 = commandpointsblu1 - 20;
-    publicVariable "commandpointsblu1";
+if (DUWSP_Core_bluforCommandPoints>20) then {
+    DUWSP_Core_bluforCommandPoints = DUWSP_Core_bluforCommandPoints - 20;
+    publicVariable "DUWSP_Core_bluforCommandPoints";
     
     playSound "loadgun";
 

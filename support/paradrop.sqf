@@ -2,12 +2,12 @@ _target = _this select 0;
 
 _lz = getpos _target;
 
-if (commandpointsblu1<25) exitWith  
+if (DUWSP_Core_bluforCommandPoints<25) exitWith  
 {
   ["info",["Not enough command points","Not enough Command Points (25CP required)"]] call bis_fnc_showNotification;
 };
-commandpointsblu1 = commandpointsblu1 - 25;
-publicVariable "commandpointsblu1";
+DUWSP_Core_bluforCommandPoints = DUWSP_Core_bluforCommandPoints - 25;
+publicVariable "DUWSP_Core_bluforCommandPoints";
 
 hint "Reinforcements ETA: 1 minute";
 sleep 60;

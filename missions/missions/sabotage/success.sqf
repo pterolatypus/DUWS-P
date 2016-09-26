@@ -26,13 +26,13 @@ reward = (20 * cp_reward_multiplier);
 ["TaskSucceeded",["",_mission_name]] call bis_fnc_showNotification;
 ["cpaddedmission",[reward]] call bis_fnc_showNotification;
 WARCOM_blufor_ap = WARCOM_blufor_ap + 20;
-commandpointsblu1 = commandpointsblu1 + reward;
+DUWSP_Core_bluforCommandPoints = DUWSP_Core_bluforCommandPoints + reward;
 missions_success = missions_success + 1;
-publicVariable "commandpointsblu1";
+publicVariable "DUWSP_Core_bluforCommandPoints";
 publicVariable "WARCOM_blufor_ap";
 finishedMissionsNumber = finishedMissionsNumber + 1;
 publicVariable "finishedMissionsNumber";
 _operHandler = execVM "dialog\operative\operative_mission_complete.sqf";
 
 // ADD PERSISTENT STAT
-_addmission = call persistent_fnc_incrementCompletedMissions;
+_addmission = call DUWSP_Persistency_fnc_incrementCompletedMissions;

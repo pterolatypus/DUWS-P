@@ -6,9 +6,9 @@ _atPod3 = (_this select 3) select 4;
 _centerPos = (_this select 3) select 5;
 _fob = (_this select 3) select 6;
 
-if (commandpointsblu1>15) then {
-    commandpointsblu1 = commandpointsblu1 - 15;
-    publicVariable "commandpointsblu1";
+if (DUWSP_Core_bluforCommandPoints>15) then {
+    DUWSP_Core_bluforCommandPoints = DUWSP_Core_bluforCommandPoints - 15;
+    publicVariable "DUWSP_Core_bluforCommandPoints";
     
     playSound "loadgun";
 

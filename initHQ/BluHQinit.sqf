@@ -45,7 +45,7 @@ publicVariable "hq_blu1";
 _hq setpos [_hqblu select 0, _hqblu select 1, 0.59];
 _hq disableAI "AUTOTARGET";
 _hq setdir 0;
-[hq_blu1] remoteExecCall ["DUWSR_fnc_addFobActions", 0, true];
+[hq_blu1] remoteExecCall ["DUWSP_fnc_addFobActions", 0, true];
 removeallweapons _hq;
 _hq switchMove "acts_StandingSpeakingUnarmed";
 _handle = [_hq] execVM "sounds\radiochatter.sqf";

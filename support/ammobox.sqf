@@ -2,12 +2,12 @@ _target = _this select 0;
 
 _location = getpos _target;
 
-if (commandpointsblu1<2) exitWith
+if (DUWSP_Core_bluforCommandPoints<2) exitWith
 {
   ["info",["Not enough command points","Not enough Command Points (2CP required)"]] call bis_fnc_showNotification;
 };
-commandpointsblu1 = commandpointsblu1 - 2;
-publicVariable "commandpointsblu1";
+DUWSP_Core_bluforCommandPoints = DUWSP_Core_bluforCommandPoints - 2;
+publicVariable "DUWSP_Core_bluforCommandPoints";
 
 hint "A supply crate has been dropped near your location";
 

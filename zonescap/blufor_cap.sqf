@@ -41,8 +41,8 @@ str(_markername) setMarkerColor "ColorGreen";
 str(_markername2) setMarkerColor "ColorGreen";
 
 if (isServer) then {
-commandpointsblu1 = commandpointsblu1 + (_points/2); 
-publicVariable "commandpointsblu1"; 
+DUWSP_Core_bluforCommandPoints = DUWSP_Core_bluforCommandPoints + (_points/2); 
+publicVariable "DUWSP_Core_bluforCommandPoints"; 
 };
 
 ["CPadded_retaken",[(_points/2)]] call bis_fnc_showNotification;
